@@ -21,7 +21,7 @@ jobs:
         run: |
           CURRENT_VERSION=$(grep -oP '"keycloak-connect": "\K[^"]+' nodejs/resource-server/package.json)
           echo "Current version: $CURRENT_VERSION"
-          echo "current_version=$CURRENT_VERSION" >> $GITHUB_ENV
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
       - name: Check version difference
         id: check-version
