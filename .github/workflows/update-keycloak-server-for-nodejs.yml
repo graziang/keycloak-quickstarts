@@ -1,32 +1,32 @@
-name: Update Keycloak Version for NodeJS
+name: Update Node.js Adapter Version
 
 on:
   workflow_dispatch:
     inputs:
       new_version:
-        description: "New version of keycloak for NodeJS"
+        description: "New Node.js adapter version to update"
         required: true
         type: string
 
 jobs:
-  update-keycloak-connect:
+  update-nodejs-adapter-version:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get current version of keycloak-connect
+      - name: Get current Node.js adapter version
         id: get-current-version
         run: |
-          CURRENT_VERSION=$(grep -oP '"keycloak-connect": "\K[^"]+' nodejs/resource-server/package.json)
-          echo "Current version: $CURRENT_VERSION"
-          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
+          CURRENT_NODEJS_VERSION=$(grep -oP '"keycloak-connect": "\K[^"]+' nodejs/resource-server/package.json)
+          echo "Current version: $CURRENT_NODEJS_VERSION"
+          echo "CURRENT_NODEJS_VERSION=$CURRENT_NODEJS_VERSION" >> $GITHUB_ENV
 
       - name: Check version difference
         id: check-version
         run: |
-          if [ "${{ github.event.inputs.new_version }}" = "$CURRENT_VERSION" ]; then
+          if [ "${{ github.event.inputs.new_version }}" = "$CURRENT_NODEJS_VERSION" ]; then
             echo "The version is already up-to-date."
             echo "update_needed=false" >> $GITHUB_ENV
           else
@@ -34,11 +34,11 @@ jobs:
             echo "update_needed=true" >> $GITHUB_ENV
           fi
 
-      - name: Update keycloak-connect version
+      - name: Update Node.js adapter version
         if: env.update_needed == 'true'
         run: |
-          NEW_VERSION="${{ github.event.inputs.new_version }}"
-          echo "Updating keycloak-connect to version $NEW_VERSION"
+          NEW_VERSION=${{ github.event.inputs.new_version }}
+          echo "Updating Node.js adapter to version $NEW_VERSION"
           sed -i 's|"keycloak-connect": "[^"]*"|"keycloak-connect": "'"$NEW_VERSION"'"|g' nodejs/resource-server/package.json
 
       - name: Configure Git
@@ -51,5 +51,5 @@ jobs:
         if: env.update_needed == 'true'
         run: |
           git add nodejs/resource-server/package.json
-          git commit -m "Update keycloak-connect for nodejs to version ${{ github.event.inputs.new_version }}"
+          git commit -m "Update Node.js adapter version to  ${{ github.event.inputs.new_version }}"
           git push origin main
