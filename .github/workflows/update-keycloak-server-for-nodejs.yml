@@ -26,7 +26,7 @@ jobs:
       - name: Check version difference
         id: check-version
         run: |
-          if [ "${{ github.event.inputs.new_version }}" = "CURRENT_VERSION" ]; then
+          if [ "${{ github.event.inputs.new_version }}" = "$CURRENT_VERSION" ]; then
             echo "The version is already up-to-date."
             echo "update_needed=false" >> $GITHUB_ENV
           else
