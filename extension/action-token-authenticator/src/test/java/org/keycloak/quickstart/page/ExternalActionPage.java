@@ -2,6 +2,7 @@ package org.keycloak.quickstart.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.Keys;
 
 /**
  * @author <a href="mailto:bruno@abstractj.org">Bruno Oliveira</a>
@@ -18,7 +19,7 @@ public class ExternalActionPage {
     private WebElement field2;
 
     public void submit() {
-        submitButton.click();
+        submitButton.sendKeys(Keys.ENTER);
     }
 
     public void field1(String field1Text) {

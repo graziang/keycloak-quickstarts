@@ -74,7 +74,9 @@ if [ "$1" = "jakarta" ]; then
   echo "Running tests with jakarta profile"
   run_tests jakarta
 elif [ "$1" = "extension" ]; then
-  run_tests extension
+  for i in {1..10}; do
+    run_tests extension
+  done
 elif [ "$1" = "nodejs" ]; then
   npm -C nodejs/resource-server install
   npm -C nodejs/resource-server ci
