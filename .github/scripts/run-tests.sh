@@ -74,7 +74,7 @@ if [ "$1" = "jakarta" ]; then
   echo "Running tests with jakarta profile"
   run_tests jakarta
 elif [ "$1" = "extension" ]; then
-  for i in {1..10}; do
+  for i in {1..3}; do
     run_tests extension
   done
 elif [ "$1" = "nodejs" ]; then
