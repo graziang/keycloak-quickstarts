@@ -187,7 +187,7 @@ public class ArquillianSimpleStorageTest {
     private void navigateToAccount(String user, String password) {
         navigateTo(format("/realms/%s/account/#/", testsHelper.getTestRealmName()));
         waitForPageToLoad();
-        loginPage.login(user, password);
+        loginPage.login(user, testsHelper.changePassword(user, "quickstart"));
     }
 
     public void waitForPageToLoad() {
