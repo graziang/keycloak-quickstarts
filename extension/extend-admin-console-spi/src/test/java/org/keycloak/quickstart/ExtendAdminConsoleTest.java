@@ -87,7 +87,7 @@ public class ExtendAdminConsoleTest {
     public void testAdminUiTodoApp() throws Exception {
         adminConsole.navigateTo();
         waitForPageToLoad();
-        loginPage.login("admin", testsHelper.changePassword("admin", "master"));
+        loginPage.login("admin", "admin");
         waitForPageToLoad();
         assertThat(webDriver.getTitle(), containsString("Keycloak Administration Console"));
 
