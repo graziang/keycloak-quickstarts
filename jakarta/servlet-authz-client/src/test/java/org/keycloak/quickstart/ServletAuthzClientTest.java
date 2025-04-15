@@ -35,6 +35,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.keycloak.quickstart.test.page.LoginPage;
 import org.keycloak.quickstart.test.FluentTestsHelper;
+import static org.keycloak.quickstart.test.TestsHelper.keycloakBaseUrl;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
